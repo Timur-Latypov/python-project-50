@@ -13,16 +13,16 @@ def generate_diff(path1, path2):
             if key in file2:
                 if value1 == value2:
                     diff[key] = {'equal': value1}
-                    #f'  {key}: {value1}'.lower()
+                    # f'  {key}: {value1}'.lower()
                 else:
                     diff[key] = {'different': (value1, value2)}
-                    #f'- {key}: {value1}\n+ {key}: {value2}'.lower()
+                    # f'- {key}: {value1}\n+ {key}: {value2}'.lower()
             else:
                 diff[key] = {'value1': value1}
-                #f'- {key}: {value1}'.lower()
+                # f'- {key}: {value1}'.lower()
         elif key in file2:
             diff[key] = diff[key] = {'value2': value2}
-            #f'+ {key}: {value2}'.lower()
+            # f'+ {key}: {value2}'.lower()
     sorted_diff = {key: diff[key] for key in sorted(diff)}
     return ('{\n' + '\n'.join(make_strings(sorted_diff)) + '\n}')
 
@@ -44,8 +44,7 @@ def make_strings(diff):
     return diff_strings
 
 
-
-f1 = '/media/timur/Windows/Hexlet Projects/Project 2/test_files/file1.json'
+'''f1 = '/media/timur/Windows/Hexlet Projects/Project 2/test_files/file1.json'
 f2 = '/media/timur/Windows/Hexlet Projects/Project 2/test_files/file2.json'
 
-print(generate_diff(f1, f2))
+print(generate_diff(f1, f2))'''
