@@ -1,9 +1,6 @@
 install:
 	poetry install
 
-build:
-	poetry build
-
 publish:
 	poetry publish --dry-run
 
@@ -13,11 +10,21 @@ package-install:
 gendiff:
 	poetry run gendiff
 
-make lint:
+lint:
 	poetry run flake8 gendiff
 
-make test-coverage:
+test-coverage:
 	poetry run pytest --cov=hexlet_python_package --cov-report xml
+
+test:
+	poetry run pytest
+
+selfcheck:
+	poetry check
+
+check: selfcheck test lint
 
 build: check
 	poetry build
+
+.PHONY: install test lint selfcheck check build
