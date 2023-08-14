@@ -15,3 +15,9 @@ gendiff:
 
 make lint:
 	poetry run flake8 gendiff
+
+make test-coverage:
+	poetry run pytest --cov=hexlet_python_package --cov-report xml
+
+build: check
+	poetry build
