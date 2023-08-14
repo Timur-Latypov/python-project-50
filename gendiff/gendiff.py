@@ -34,17 +34,24 @@ def make_strings(diff):
         for state in diff_status:
             match state:
                 case 'equal':
-                    diff_strings.append(f'    {key}: {diff_status[state]}'.lower())
+                    diff_strings.append(
+                        f'    {key}: {diff_status[state]}'.lower())
                 case 'different':
-                    diff_strings.append(f'  - {key}: {diff_status[state][0]}\n  + {key}: {diff_status[state][1]}'.lower())
+                    diff_strings.append(
+                        f'  - {key}: {diff_status[state][0]}\n  ' +
+                        f'+ {key}: {diff_status[state][1]}'.lower())
                 case 'value1':
-                    diff_strings.append(f'  - {key}: {diff_status[state]}'.lower())
+                    diff_strings.append(
+                        f'  - {key}: {diff_status[state]}'.lower())
                 case 'value2':
-                    diff_strings.append(f'  + {key}: {diff_status[state]}'.lower())
+                    diff_strings.append(
+                        f'  + {key}: {diff_status[state]}'.lower())
     return diff_strings
 
 
-'''f1 = '/media/timur/Windows/Hexlet Projects/Project 2/python-project-50/tests/fixtures/file1.json'
-f2 = '/media/timur/Windows/Hexlet Projects/Project 2/python-project-50/tests/fixtures/file2.json'
+'''f1 = '/media/timur/Windows/Hexlet Projects/Project 2
+/python-project-50/tests/fixtures/file1.json'
+f2 = '/media/timur/Windows/Hexlet Projects/Project 2
+/python-project-50/tests/fixtures/file2.json'
 
 print(generate_diff(f1, f2))'''
