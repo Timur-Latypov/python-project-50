@@ -1,24 +1,22 @@
 import pytest
+import os
 from gendiff.gendiff import generate_diff
 
 
-@pytest.fixture
-def get_file1_path():
-    return 'tests/fixtures/file1.json'
+def get_fixture_path(file_name):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(current_dir, 'fixtures', file_name)
 
-@pytest.fixture
-def get_file2_path():
-    return 'tests/fixtures/file2.json'
-
-@pytest.fixture
-def get_diff_path():
-    diff = open('tests/fixtures/diff')
+def get_diff_fixture():
+    diff = open(get_fixture_path('diff'))
     return diff.read()
 
+expected = get_diff_fixture()
 
-def test_diff(get_file1_path, get_file2_path):
-    result = generate_diff(get_file1_path, get_file2_path)
-    diff = open('tests/fixtures/diff')
+@pytest.mark.parametrize("file1,file2", [('file1.json', 'file2.json'), ('file1.yml', 'file2.yml')])
+def test_generate_diff(file1, file2):
+    file1_path = get_fixture_path(file1)
+    file2_path = get_fixture_path(file2)
+    expected = get_diff_fixture()
+    assert generate_diff(file1_path, file2_path) == expected
 
-    assert result == diff.read()
-    # '{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}'

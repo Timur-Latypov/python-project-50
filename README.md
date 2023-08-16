@@ -7,5 +7,11 @@
 ### CodeClimate status
 [![Maintainability](https://api.codeclimate.com/v1/badges/e655f707b228a4c19106/maintainability)](https://codeclimate.com/github/Timur-Latypov/python-project-50/maintainability)
 
+### Test Coverage
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e655f707b228a4c19106/test_coverage)](https://codeclimate.com/github/Timur-Latypov/python-project-50/test_coverage)
+
 ### Gendiff asciinema
 [![asciicast](https://asciinema.org/a/jFCtTu2rG7aI7Zq1UpgJO1Bqu.svg)](https://asciinema.org/a/jFCtTu2rG7aI7Zq1UpgJO1Bqu)
+
+### Gendiff step 5 asciinema
+[![asciicast](https://asciinema.org/a/r0WjCtImUJ4WxxVxYTm8rRea0.svg)](https://asciinema.org/a/r0WjCtImUJ4WxxVxYTm8rRea0)
