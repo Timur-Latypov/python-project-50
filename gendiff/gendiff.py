@@ -40,7 +40,7 @@ def dict_to_strings(item, indent):
         return item
 
 
-def generate_diff(path1, path2, formatter=stylish):
+def generate_diff(path1, path2, formatter=stylish): # noqa: ignore=C901
     file1, file2 = parser.parse_files(path1, path2)
 
     def inner(tree1, tree2, depth=1):
@@ -58,7 +58,7 @@ def generate_diff(path1, path2, formatter=stylish):
                         return ['different_values', depth, key, value1, value2]
                 else:
                     return ['removed', depth, key, value1]
-            elif key in tree2:
+            else:
                 return ['added', depth, key, value2]
         keys = sorted({*tree1.keys(), *tree2.keys()})
         diff = list(map(lambda key: walk(key, tree1, tree2), keys))

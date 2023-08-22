@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-import gendiff.gendiff1 as gendiff1
+import gendiff.gendiff as gendiff
 
 
 def main():
@@ -10,11 +10,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         )
     parser.add_argument("-f", "--format", help='set format of output',
-                        default=gendiff1.stylish)
+                        default=gendiff.stylish)
     parser.add_argument("first_file")
     parser.add_argument("second_file")
     args = parser.parse_args()
-    print(gendiff1.generate_diff(args.first_file, args.second_file))
+    print(gendiff.generate_diff(args.first_file, args.second_file))
 
 
 if __name__ == '__main__':
