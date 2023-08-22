@@ -12,5 +12,3 @@ def parse_files(path1, path2):
     if path2.endswith('.yml') or path2.endswith('.yaml'):
         file2 = yaml.load(open(path2), Loader=yaml.CLoader)
     return file1, file2
-
-# print(parser('tests/fixtures/file1.json', 'tests/fixtures/file2.yml'))
