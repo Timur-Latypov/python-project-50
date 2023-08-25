@@ -18,3 +18,6 @@
 
 ### Gendiff step 6 asciinema
 [![asciicast](https://asciinema.org/a/XXxYJT0dKW7PL9iB4MIio9xaX.svg)](https://asciinema.org/a/XXxYJT0dKW7PL9iB4MIio9xaX)
+
+### Gendiff step 7 asciinema
+[![asciicast](https://asciinema.org/a/quErY3QXcLz7mQYcG5LSrb2iB.svg)](https://asciinema.org/a/quErY3QXcLz7mQYcG5LSrb2iB)

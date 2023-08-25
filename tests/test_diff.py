@@ -1,7 +1,8 @@
 import pytest
 import os
 from gendiff.gendiff import generate_diff
-
+import gendiff.formaters.plain_format as plain
+import gendiff.formaters.stylish_format as stylish
 
 def get_fixture_path(file_name):
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -15,12 +16,14 @@ def get_diff_fixture(nesting):
 def test_plain(file1, file2):
     file1_path = get_fixture_path(file1)
     file2_path = get_fixture_path(file2)
-    expected = get_diff_fixture('diff_plain')
+    expected = get_diff_fixture('format_stylish_plain')
     assert generate_diff(file1_path, file2_path) == expected
 
 @pytest.mark.parametrize("file1,file2", [('nested1.json', 'nested2.json'), ('nested1.yml', 'nested2.yml')])
-def test_plain(file1, file2):
+def test_nested(file1, file2):
     file1_path = get_fixture_path(file1)
     file2_path = get_fixture_path(file2)
-    expected = get_diff_fixture('diff_nested')
-    assert generate_diff(file1_path, file2_path) == expected
+    expected_stylish = get_diff_fixture('format_stylish_nested')
+    expected_plain = get_diff_fixture('format_plain')
+    assert generate_diff(file1_path, file2_path, formatter=stylish.stylish) == expected_stylish
+    assert generate_diff(file1_path, file2_path, formatter=plain.plain) == expected_plain
