@@ -1,10 +1,10 @@
-import gendiff.formaters.stylish_format as stylish
-import gendiff.parser as parser
+from gendiff.formatters.stylish_format import stylish
+from gendiff.parser import parse_files
 
 
 
-def generate_diff(path1, path2, formatter=stylish.stylish): # noqa: ignore=C901
-    file1, file2 = parser.parse_files(path1, path2)
+def generate_diff(path1, path2, formatter=stylish): # noqa: ignore=C901
+    file1, file2 = parse_files(path1, path2)
 
     def inner(tree1, tree2, depth=1):
         def walk(key, tree1, tree2):

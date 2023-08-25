@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 import argparse
-import gendiff.gendiff as gendiff
-from gendiff.formaters.stylish_format import stylish
-from gendiff.formaters.plain_format import plain
+from gendiff.gendiff import generate_diff
+from gendiff.formatters.stylish_format import stylish
+from gendiff.formatters.plain_format import plain
+from gendiff.formatters.json_format import make_json
 
 
 def main():
@@ -17,11 +18,12 @@ def main():
     args = parser.parse_args()
     match args.format:
         case 'plain':
-            formater = plain
+            formatter = plain
         case 'stylish':
-            formater = stylish
-    print(gendiff.generate_diff(
-        args.first_file, args.second_file, formater))
+            formatter = stylish
+        case 'json':
+            formatter = make_json
+    print(generate_diff(args.first_file, args.second_file, formatter))
 
 
 if __name__ == '__main__':
