@@ -1,1 +1,1 @@
-__all__ = ('formatters')
+__all__ = ('formatters', 'generate_diff')
