@@ -1,1 +1,1 @@
-__all__ = ('formaters')
+__all__ = ('formatters')

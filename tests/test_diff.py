@@ -9,8 +9,8 @@ def get_fixture_path(file_name):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     return os.path.join(current_dir, 'fixtures', file_name)
 
-def get_diff_fixture(nesting):
-    diff = open(get_fixture_path(nesting))
+def get_diff_fixture(file_name):
+    diff = open(get_fixture_path(file_name))
     return diff.read()
 
 @pytest.mark.parametrize("file1,file2", [('plain1.json', 'plain2.json'), ('plain1.yml', 'plain2.yml')])
