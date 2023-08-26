@@ -45,5 +45,7 @@ def normalize(value):
         return 'null'
     elif isinstance(value, dict):
         return '[complex value]'
-    else:
+    elif isinstance(value, str):
         return f"'{value}'"
+    else:
+        return value
