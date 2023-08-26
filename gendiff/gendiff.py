@@ -1,8 +1,17 @@
 from gendiff.formatters.stylish_format import stylish
+from gendiff.formatters.plain_format import plain
+from gendiff.formatters.json_format import make_json
 from gendiff.parser import parse_files
 
 
 def generate_diff(path1, path2, formatter=stylish):
+    match formatter:
+        case 'plain':
+            formatter = plain
+        case 'stylish':
+            formatter = stylish
+        case 'json':
+            formatter = make_json
     file1, file2 = parse_files(path1, path2)
     sorted_diff = make_diff(file1, file2)
     diff_strings = formatter(sorted_diff)
