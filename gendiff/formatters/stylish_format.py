@@ -19,7 +19,7 @@ def make_string(diff, depth):
             return f'{indent}- {key}: {normalize(value1, indent)}\n'\
                 + f'{indent}+ {key}: {normalize(value2, indent)}'
         case 'different_dict':
-            strings = make_strings(*childrens, depth+1)
+            strings = make_strings(*childrens, depth + 1)
             return f'{indent}  {key}: {strings}' + f'\n{indent}  }}'
         case 'removed':
             [value] = childrens
