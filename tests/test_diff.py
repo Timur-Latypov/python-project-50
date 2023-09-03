@@ -1,9 +1,6 @@
 import pytest
 import os
 from gendiff.gendiff import generate_diff
-from gendiff.formatters.plain_format import plain
-from gendiff.formatters.stylish_format import stylish
-from gendiff.formatters.json_format import make_json
 
 
 def get_fixture_path(file_name):
