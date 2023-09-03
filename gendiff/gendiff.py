@@ -1,10 +1,11 @@
 from gendiff.formatters.stylish_format import stylish
 from gendiff.formatters.plain_format import plain
 from gendiff.formatters.json_format import make_json
-from gendiff.parser import parse_files
+from gendiff.parser import parse
+from os.path import splitext
 
 
-def generate_diff(path1, path2, formatter=stylish):
+def generate_diff(path1, path2, formatter='stylish'):
     match formatter:
         case 'plain':
             formatter = plain
@@ -12,10 +13,17 @@ def generate_diff(path1, path2, formatter=stylish):
             formatter = stylish
         case 'json':
             formatter = make_json
-    file1, file2 = parse_files(path1, path2)
-    sorted_diff = make_diff(file1, file2)
+    data1 = get_file_content(path1)
+    data2 = get_file_content(path2)
+    sorted_diff = make_diff(data1, data2)
     diff_strings = formatter(sorted_diff)
     return diff_strings
+
+
+def get_file_content(path):
+    with open(path) as file:
+        file_extension = splitext(path)[1]
+        return parse(file, file_extension)
 
 
 def make_diff(tree1, tree2):

@@ -5,6 +5,12 @@ description = ""
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 packages = [{include = "gendiff"}]
+repository = "https://github.com/Timur-Latypov/python-project-50"
+classifiers = [
+    "Environment :: Console",
+    "Programming Language :: Python :: 3.1",
+    "Operating System :: POSIX :: Linux"
+]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"

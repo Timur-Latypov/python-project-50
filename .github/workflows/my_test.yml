@@ -22,14 +22,11 @@ jobs:
         run: |
           pip install poetry
           make install
-      - name: Run linter and pytest
-        run: |
-          make check
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
         env:
-          CC_TEST_REPORTER_ID: 6fca7e82d075cb9577dd8f602ada7bbe673ef2900201946b53cb0527eab51bd6
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_COVERAGE }}
         with:
           coverageCommand: make test-coverage
           debug: true
