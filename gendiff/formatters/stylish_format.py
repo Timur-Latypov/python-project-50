@@ -11,14 +11,14 @@ def make_string(diff, depth):
     state, key, *childrens = diff
     indent = ' ' * (depth * 4 - 2)
     match state:
-        case 'equal':
+        case 'unchanged':
             [value] = childrens
             return f'{indent}  {key}: {normalize(value, indent)}'
-        case 'different_values':
+        case 'changed':
             value1, value2 = childrens
             return f'{indent}- {key}: {normalize(value1, indent)}\n'\
                 + f'{indent}+ {key}: {normalize(value2, indent)}'
-        case 'different_dict':
+        case 'nested':
             strings = make_strings(*childrens, depth + 1)
             return f'{indent}  {key}: {strings}' + f'\n{indent}  }}'
         case 'removed':

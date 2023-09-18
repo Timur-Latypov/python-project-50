@@ -14,19 +14,19 @@ def filter_unchanged_strings(strings):
 
 def make_string(diff, acc):
     templates = {
-        'different_values': "Property '{0}' was updated. From {1} to {2}",
+        'changed': "Property '{0}' was updated. From {1} to {2}",
         'removed': "Property '{0}' was removed",
         'added': "Property '{0}' was added with value: {1}",
     }
     state, key, *childrens = diff
     match state:
-        case 'different_values':
+        case 'changed':
             value1, value2 = childrens
             value1 = normalize(value1)
             value2 = normalize(value2)
             string = templates[state]
             return string.format('.'.join(acc + [key]), value1, value2)
-        case 'different_dict':
+        case 'nested':
             return make_strings(*childrens, acc + [key])
         case 'removed':
             [value] = childrens

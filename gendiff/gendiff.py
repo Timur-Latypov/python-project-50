@@ -15,7 +15,7 @@ def generate_diff(path1, path2, formatter='stylish'):
             formatter = make_json
     data1 = get_file_content(path1)
     data2 = get_file_content(path2)
-    sorted_diff = make_diff(data1, data2)
+    sorted_diff = make_diff_tree(data1, data2)
     diff_strings = formatter(sorted_diff)
     return diff_strings
 
@@ -26,7 +26,7 @@ def get_file_content(path):
         return parse(file, file_extension)
 
 
-def make_diff(tree1, tree2):
+def make_diff_tree(tree1, tree2):
     keys = sorted({*tree1.keys(), *tree2.keys()})
     diff = list(map(lambda key: make_children(key, tree1, tree2), keys))
     return diff
@@ -46,9 +46,9 @@ def make_children(key, tree1, tree2):
 
 def compare_values(value1, value2, key):
     if value1 == value2:
-        return ['equal', key, value1]
+        return ['unchanged', key, value1]
     elif isinstance(value1, dict) and isinstance(value2, dict):
-        return ['different_dict', key,
-                make_diff(value1, value2)]
+        return ['nested', key,
+                make_diff_tree(value1, value2)]
     else:
-        return ['different_values', key, value1, value2]
+        return ['changed', key, value1, value2]
