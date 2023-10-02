@@ -13,25 +13,25 @@ def make_string(diff, depth):
     match state:
         case 'unchanged':
             [value] = childrens
-            return f'{indent}  {key}: {normalize(value, indent)}'
+            return f'{indent}  {key}: {normalize(value, depth)}'
         case 'changed':
             value1, value2 = childrens
-            return f'{indent}- {key}: {normalize(value1, indent)}\n'\
-                + f'{indent}+ {key}: {normalize(value2, indent)}'
+            return f'{indent}- {key}: {normalize(value1, depth)}\n'\
+                + f'{indent}+ {key}: {normalize(value2, depth)}'
         case 'nested':
             strings = make_strings(*childrens, depth + 1)
             return f'{indent}  {key}: {strings}' + f'\n{indent}  }}'
         case 'removed':
             [value] = childrens
-            return f'{indent}- {key}: {normalize(value, indent)}'
+            return f'{indent}- {key}: {normalize(value, depth)}'
         case 'added':
             [value] = childrens
-            return f'{indent}+ {key}: {normalize(value, indent)}'
+            return f'{indent}+ {key}: {normalize(value, depth)}'
 
 
-def normalize(item, indent):
+def normalize(item, depth):
     if isinstance(item, dict):
-        return dict_to_string(item, indent)
+        return dict_to_string(item, depth)
     elif item is True or item is False:
         return str(item).lower()
     elif item is None:
@@ -40,7 +40,8 @@ def normalize(item, indent):
         return item
 
 
-def dict_to_string(dictionary, indent):
-    strings = [f'{indent}  {key}: {normalize(value, indent+"    ")}'
+def dict_to_string(dictionary, depth):
+    indent = ' ' * (depth * 4 - 2)
+    strings = [f'{indent}  {key}: {normalize(value, depth + 1)}'
                for key, value in dictionary.items()]
     return '{\n    ' + '\n    '.join(strings) + f'\n{indent}  }}'
