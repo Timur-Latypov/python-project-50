@@ -28,27 +28,18 @@ def get_file_content(path):
 
 def make_diff_tree(tree1, tree2):
     keys = sorted({*tree1.keys(), *tree2.keys()})
-    diff = list(map(lambda key: make_children(key, tree1, tree2), keys))
-    return diff
-
-
-def make_children(key, tree1, tree2):
-    value1 = tree1.get(key)
-    value2 = tree2.get(key)
-    if key in tree1:
-        if key in tree2:
-            return compare_values(value1, value2, key)
+    diff_tree = []
+    for key in keys:
+        value1 = tree1.get(key)
+        value2 = tree2.get(key)
+        if key not in tree2:
+            diff_tree.append(['removed', key, value1])
+        elif key not in tree1:
+            diff_tree.append(['added', key, value2])
+        elif value1 == value2:
+            diff_tree.append(['unchanged', key, value1])
+        elif isinstance(value1, dict) and isinstance(value2, dict):
+            diff_tree.append(['nested', key, make_diff_tree(value1, value2)])
         else:
-            return ['removed', key, value1]
-    else:
-        return ['added', key, value2]
-
-
-def compare_values(value1, value2, key):
-    if value1 == value2:
-        return ['unchanged', key, value1]
-    elif isinstance(value1, dict) and isinstance(value2, dict):
-        return ['nested', key,
-                make_diff_tree(value1, value2)]
-    else:
-        return ['changed', key, value1, value2]
+            diff_tree.append(['changed', key, value1, value2])
+    return diff_tree
